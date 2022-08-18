@@ -13,18 +13,21 @@
     <header>
         <nav>
             <h2 class="high-score"><a href="./highscores.html">View High Scores</a></h2>
-            <h2 class="time">Time: </h2>
+            <div class="timer-container">
+                <h2 class="timer">Time: </h2>
+                <h2 class="time">100</h2>
+            </div>
         </nav>
     </header>
 
     <main class="main-content">
         <h1 class="main-heading">Coding Quiz Challenge</h1>
-        <p>
+        <p id="main-text">
             Try to keep the following code-related questions within the time limit. Keep in mind that incorrect
             answers
             will penalize your score/time by <span>ten seconds!</span>
         </p>
-        <button class="btn start-quiz">Start Quiz</button>
+        <button class="btn" id="start-quiz">Start Quiz</button>
     </main>
 
     <script src="./assets/js/script.js"></script>

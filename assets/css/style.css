@@ -10,8 +10,16 @@ header {
 header nav {
     display: flex;
     justify-content: space-between;
-    margin-right: 100px;
+    margin-right: 50px;
     padding: 20px 0px 0 20px;
+}
+
+.timer-container {
+    display: flex;
+}
+
+.timer {
+    padding-right: 10px;
 }
 
 header nav a {
@@ -46,7 +54,7 @@ main p span {
     color: red;
 }
 
-.start-quiz {
+#start-quiz {
     font-size: 30px;
     font-weight: 600;
     margin-top: 10px;
@@ -57,7 +65,7 @@ main p span {
     padding: 10px;
 }
 
-.start-quiz:hover {
+#start-quiz:hover {
     /* maybe */
     box-shadow: 5px 5px rgb(0, 0, 0, 0.3);
 }
