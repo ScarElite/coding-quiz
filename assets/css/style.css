@@ -3,16 +3,6 @@
     font-family: 'Courier New', Courier, monospace;
 }
 
-.quiz-content {
-    display: flexbox;
-    position: relative;
-    left: 20%;
-    border: 2px solid black;
-    width: 60%;
-    padding-bottom: 150px;
-    max-width: 60%;
-}
-
 header {
     margin: 20px 20px 0 20px;
 }
@@ -26,6 +16,7 @@ header nav {
 
 header nav a {
     text-decoration: none;
+    color: purple;
 }
 
 header nav a:hover {
