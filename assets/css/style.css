@@ -69,6 +69,10 @@ main p span {
     box-shadow: 5px 5px rgb(0, 0, 0, 0.3);
 }
 
+#theList {
+    padding-left: 0;
+}
+
 .choice {
     display: block;
     font-size: 48px;
@@ -77,6 +81,13 @@ main p span {
     text-align: left;
     margin-bottom: 15px;
     background-color: blueviolet;
+    border: none;
     border-radius: 20px;
     padding-left: 20px;
+    width: 40%;
+}
+
+.choice:hover {
+    background-color: rgb(144, 0, 255);
+    opacity: 0.5;
 }

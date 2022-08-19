@@ -29,25 +29,25 @@ var create = function () {
     var newHeadingEl = mainHeadingEl;
     // Create a for loop here
     newHeadingEl.textContent = questions[0];
-    newHeadingEl.setAttribute("Style", "color: black; margin-bottom: 10%;");
+    newHeadingEl.setAttribute("Style", "color: black; margin-bottom: 5%; text-align: left");
 
     var arr = ["A:", "B:", "C:", "D:"];
     var cont = document.getElementById('container');
 
     // create ul element and set the attributes.
-    var choiceList = document.createElement('ul');
-    choiceList.className = "choiceList";
-    choiceList.setAttribute('id', 'theList');
+    // var choiceList = document.createElement('ul');
+    // choiceList.className = "choiceList";
+    // choiceList.setAttribute('id', 'theList');
 
     for (i = 0; i <= arr.length - 1; i++) {
-        var choice = document.createElement('li');
+        var choice = document.createElement('button');
         choice.innerHTML = arr[i];
         choice.className = "choice";
 
-        choiceList.appendChild(choice);
+        cont.appendChild(choice);
     }
 
-    cont.appendChild(choiceList);
+    // cont.appendChild(choiceList);
 }
 
 
