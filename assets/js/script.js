@@ -60,9 +60,10 @@ var clearQuestion = function () {
 function runTimer() {
     var time = setInterval(function () {
         timer.innerHTML = count;
-        count--;
+        if (count > 0) {
+            count--;
+        }
     }, 1000);
-
 };
 
 startBtn.addEventListener("click", start);
