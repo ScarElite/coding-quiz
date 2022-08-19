@@ -40,7 +40,7 @@ header nav a:hover {
 .main-heading {
     font-weight: 900;
     font-size: 56px;
-    color: purple;
+    color: darkcyan;
 }
 
 main p {
@@ -57,7 +57,7 @@ main p span {
     font-size: 36px;
     font-weight: 600;
     margin-top: 10px;
-    background-color: darkgreen;
+    background-color: darkcyan;
     color: white;
     border: none;
     border-radius: 10px;
@@ -80,7 +80,7 @@ main p span {
     color: white;
     text-align: left;
     margin-bottom: 15px;
-    background-color: blueviolet;
+    background-color: darkcyan;
     border: none;
     border-radius: 20px;
     padding-left: 20px;
@@ -88,6 +88,6 @@ main p span {
 }
 
 .choice:hover {
-    background-color: rgb(144, 0, 255);
+    background-color: darkblue;
     opacity: 0.5;
 }

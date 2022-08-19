@@ -1,20 +1,30 @@
 var startBtn = document.querySelector("#start-quiz");
+var timer = document.querySelector(".time");
+var count = 100;
 var mainContentEl = document.querySelector(".main-content")
 var mainHeadingEl = document.querySelector(".main-heading");
-var questions = ["Commonly used DataTypes DO NOT include what?", "Question 2", "Question 3", "Question 4", "Question 5", "Question 6", "Question 7", "Question 8", "Question 9", "Question 10"];
+var questions = ["Commonly used data types DO NOT include what?", "Question 2", "Question 3", "Question 4", "Question 5", "Question 6", "Question 7", "Question 8", "Question 9", "Question 10"];
 var choices = ["A", "B", "C", "D"];
+var questions = [
+    {
+        question: "Commonly used data types DO NOT include what?",
+        choices: ["Test 1", "Test 2", "Test 3", "Test 4"],
+        correctAnswer: "Test 3"
+    }
+]
 
 var start = function () {
     console.log("Start Quiz");
-    mainContentEl = clear();
+    mainContentEl = clearMain();
     console.log("Content cleared");
 
     mainContentEl = create();
     console.log("Ran the create function");
 
+    runTimer();
 }
 
-var clear = function () {
+var clearMain = function () {
     var mainTextEl = document.querySelector("#main-text");
 
     console.log("Removing main content");
@@ -34,11 +44,6 @@ var create = function () {
     var arr = ["A:", "B:", "C:", "D:"];
     var cont = document.getElementById('container');
 
-    // create ul element and set the attributes.
-    // var choiceList = document.createElement('ul');
-    // choiceList.className = "choiceList";
-    // choiceList.setAttribute('id', 'theList');
-
     for (i = 0; i <= arr.length - 1; i++) {
         var choice = document.createElement('button');
         choice.innerHTML = arr[i];
@@ -46,9 +51,18 @@ var create = function () {
 
         cont.appendChild(choice);
     }
-
-    // cont.appendChild(choiceList);
 }
 
+var clearQuestion = function () {
+    newHeadingEl.textContent = "";
+}
+
+function runTimer() {
+    var time = setInterval(function () {
+        timer.innerHTML = count;
+        count--;
+    }, 1000);
+
+};
 
 startBtn.addEventListener("click", start);
