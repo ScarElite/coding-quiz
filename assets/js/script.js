@@ -1,112 +1,126 @@
+var containerQuestionEl = document.getElementById("question-container");
+var containerStartEl = document.getElementById("starter-container");
+var containerEndEl = document.getElementById("end-container")
+var containerScoreEl = document.getElementById("score-banner")
+var formInitials = document.getElementById("initials-form")
+var containerHighScoresEl = document.getElementById("high-score-container")
+var ViewHighScoreEl = document.getElementById("view-high-scores")
+var listHighScoreEl = document.getElementById("high-score-list")
+var correctEl = document.getElementById("correct")
+var wrongEl = document.getElementById("wrong")
 var startBtn = document.querySelector("#start-quiz");
+
+var score = 0;
+var timeleft;
+var gameover;
 // Variables for the timer
 var timer = document.querySelector(".time");
 var timerStart = 100;
 // Main content variables
-var mainContentEl = document.querySelector(".main-content");
-var mainHeadingEl = document.querySelector(".main-heading");
+var cont = document.getElementById('container');
+// var mainContentEl = document.querySelector(".main-content");
+// var mainHeadingEl = document.querySelector(".main-heading");
 // Variables for the Quiz questions and answers
-var choices = ["A", "B", "C", "D"];
 var arrayShuffledQuestions;
 var currentQuestionIndex = 0;
-const questions = [
+var questions = [
     {
         question: "Commonly used data types DO NOT include what?",
         choices: {
-            a: "Test 1",
-            b: "Test 2",
-            c: "Test 3",
-            d: "Test 4"
+            choice: "Test 1",
+            choice: "Test 2",
+            choice: "Test 3",
+            choice: "Test 4"
         },
         correctAnswer: "c"
     },
     {
         question: "What does 'DOM' stand for?",
         choices: {
-            a: "Documentation Of Methods",
-            b: "Don't Overlook Methods",
-            c: "Document Oriented Model",
-            d: "Document Object Model"
+            choice: "Documentation Of Methods",
+            choice: "Don't Overlook Methods",
+            choice: "Document Oriented Model",
+            choice: "Document Object Model"
         },
         correctAnswer: "d"
     },
     {
         question: "Test Question 3",
         choices: {
-            a: "Test 1",
-            b: "Test 2",
-            c: "Test 3",
-            d: "Test 4"
+            choice: "Test 1",
+            choice: "Test 2",
+            choice: "Test 3",
+            choice: "Test 4"
         },
         correctAnswer: "c"
     },
     {
         question: "Test Question 4",
         choices: {
-            a: "Test 1",
-            b: "Test 2",
-            c: "Test 3",
-            d: "Test 4"
+            choice: "Test 1",
+            choice: "Test 2",
+            choice: "Test 3",
+            choice: "Test 4"
         },
         correctAnswer: "c"
     },
     {
         question: "Test Question 5",
         choices: {
-            a: "Test 1",
-            b: "Test 2",
-            c: "Test 3",
-            d: "Test 4"
+            choice: "Test 1",
+            choice: "Test 2",
+            choice: "Test 3",
+            choice: "Test 4"
         },
         correctAnswer: "c"
     },
     {
         question: "Test Question 6",
         choices: {
-            a: "Test 1",
-            b: "Test 2",
-            c: "Test 3",
-            d: "Test 4"
+            choice: "Test 1",
+            choice: "Test 2",
+            choice: "Test 3",
+            choice: "Test 4"
         },
         correctAnswer: "c"
     },
     {
         question: "Test Question 7",
         choices: {
-            a: "Test 1",
-            b: "Test 2",
-            c: "Test 3",
-            d: "Test 4"
+            choice: "Test 1",
+            choice: "Test 2",
+            choice: "Test 3",
+            choice: "Test 4"
         },
         correctAnswer: "c"
     },
     {
         question: "Test Question 8",
         choices: {
-            a: "Test 1",
-            b: "Test 2",
-            c: "Test 3",
-            d: "Test 4"
+            choice: "Test 1",
+            choice: "Test 2",
+            choice: "Test 3",
+            choice: "Test 4"
         },
         correctAnswer: "c"
     },
     {
         question: "Test Question 9",
         choices: {
-            a: "Test 1",
-            b: "Test 2",
-            c: "Test 3",
-            d: "Test 4"
+            choice: "Test 1",
+            choice: "Test 2",
+            choice: "Test 3",
+            choice: "Test 4"
         },
         correctAnswer: "c"
     },
     {
         question: "Test Question 10",
         choices: {
-            a: "Test 1",
-            b: "Test 2",
-            c: "Test 3",
-            d: "Test 4"
+            choice: "Test 1",
+            choice: "Test 2",
+            choice: "Test 3",
+            choice: "Test 4"
         },
         correctAnswer: "c"
     },
@@ -117,58 +131,44 @@ var start = function () {
     mainContentEl = clearMain();
     console.log("Content cleared");
 
-    runTimer();
-
+    //add classes to show/hide start and quiz screen
+    containerStartEl.classList.add('hide');
+    containerStartEl.classList.remove('show');
+    containerQuestionEl.classList.remove('hide');
+    containerQuestionEl.classList.add('show');
     // Randomize the order that the questions appear
     arrayShuffledQuestions = questions.sort(() => Math.random() - 0.5);
+    runTimer();
     setQuestion();
-    create();
 }
 
 var setQuestion = function () {
     displayQuestion(arrayShuffledQuestions[currentQuestionIndex]);
 }
 
-// var resetChoices = function() {
-//     while ()
-// }
-
 var displayQuestion = function (index) {
-    mainHeadingEl.innerText = index.question;
-    mainHeadingEl.classList.add("main-heading-question");
+    containerQuestionEl.innerText = index.question;
+    containerQuestionEl.classList.add("main-heading-question");
 
-    // for (var i = 0; i < index.choices.length; i++) {
-    //     var answerBtn = document.createElement("button");
-    //     answerBtn.innerText = index.choices[i].choice;
-    //     answerBtn.classList.add("btn");
-    //     answerBtn.classList.add("choice");
-    //     answerBtn.addEventListener("click", answerCheck);
-    //     mainHeadingEl.appendChild(answerBtn);
-    // }
-};
+    for (var i = 0; i < index.choices.length; i++) {
+        var answerBtn = document.createElement("button");
+        answerBtn.innerText = index.choices[i].choice;
+        answerBtn.classList.add("choice");
+        answerBtn.addEventListener("click", answerCheck);
+        cont.appendChild(answerBtn);
+        console.log("This worked")
+    }
+}
 
 var clearMain = function () {
     var mainTextEl = document.querySelector("#main-text");
 
     console.log("Removing main content");
 
-    mainHeadingEl.innerHTML = "";
+    containerStartEl.innerHTML = "";
     mainTextEl.outerHTML = "";
     // startBtn.textContent = "";
     startBtn.outerHTML = "";
-}
-
-var create = function () {
-    var arr = ["A:", "B:", "C:", "D:"];
-    var cont = document.getElementById('container');
-
-    for (i = 0; i <= arr.length - 1; i++) {
-        var choice = document.createElement('button');
-        choice.innerHTML = arr[i];
-        choice.className = "choice";
-
-        cont.appendChild(choice);
-    }
 }
 
 function runTimer() {

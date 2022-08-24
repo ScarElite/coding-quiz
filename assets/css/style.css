@@ -34,7 +34,7 @@ header nav a:hover {
 .main-content {
     flex-direction: column;
     text-align: center;
-    margin: 10% 20% 0 20%;
+    margin: 15% 20% 0 20%;
 }
 
 .main-heading {
@@ -97,4 +97,12 @@ main p span {
 .choice:hover {
     background-color: darkblue;
     opacity: 0.5;
+}
+
+.show {
+    display: flex;
+}
+
+.hide {
+    display: none;
 }
