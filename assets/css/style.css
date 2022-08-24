@@ -43,6 +43,13 @@ header nav a:hover {
     color: darkcyan;
 }
 
+.main-heading-question {
+    font-weight: 900;
+    font-size: 56px;
+    color: darkcyan;
+    text-align: left;
+}
+
 main p {
     font-weight: 600;
     font-size: 36px;
