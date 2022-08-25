@@ -12,7 +12,7 @@
 <body>
     <header>
         <nav>
-            <h2 class="high-score"><a href="./highscores.html">View High Scores</a></h2>
+            <h2 id="view-high-scores" class="high-score">View High Scores</h2>
             <div class="timer-container">
                 <h2 class="timer">Time: </h2>
                 <h2 class="time">0</h2>
@@ -29,7 +29,7 @@
                 answers
                 will penalize your time by <span>ten seconds</span> and your score by <span>10 points!</span>
             </p>
-            <button class="btn" id="start-quiz">Start Quiz</button>
+            <button class="btn startend" id="start-quiz">Start Quiz</button>
         </main>
     </div>
 
@@ -51,6 +51,17 @@
                     <button class="btn startend" id="sumbit-score" type="submit">Submit</button>
                 </p>
             </form>
+        </div>
+    </div>
+
+    <div id="high-score-container" class="hide">
+        <div class="high-scores container">
+            <h1 class="high-score">High Scores</h1>
+            <ol id="high-score-list" class="score-list"></ol>
+            <div>
+                <button class="btn" id="go-back"><a href="">Go Back</a></button>
+                <button class="btn" id="clear-high-scores">Clear high scores</button>
+            </div>
         </div>
     </div>
 

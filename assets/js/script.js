@@ -10,6 +10,11 @@ var correctEl = document.getElementById("correct")
 var wrongEl = document.getElementById("wrong")
 var startBtn = document.querySelector("#start-quiz");
 
+//High Score Array
+var HighScores = [];
+var btnClearScoresEl = document.querySelector("#clear-high-scores")
+var btnGoBackEl = document.querySelector("#go-back")
+
 var score = 0;
 var timeleft;
 var gameover;
@@ -33,7 +38,7 @@ var questions = [
             { choice: "C: Test 3" },
             { choice: "D: Test 4" }
         ],
-        correctAnswer: "c"
+        correctAnswer: "C: Test 3"
     },
     {
         question: "What does 'DOM' stand for?",
@@ -53,7 +58,7 @@ var questions = [
             { choice: "C: Test 3" },
             { choice: "D: Test 4" }
         ],
-        correctAnswer: "c"
+        correctAnswer: "C: Test 3"
     },
     {
         question: "Test Question 4",
@@ -63,7 +68,7 @@ var questions = [
             { choice: "C: Test 3" },
             { choice: "D: Test 4" }
         ],
-        correctAnswer: "c"
+        correctAnswer: "C: Test 3"
     },
     {
         question: "Test Question 5",
@@ -73,7 +78,7 @@ var questions = [
             { choice: "C: Test 3" },
             { choice: "D: Test 4" }
         ],
-        correctAnswer: "c"
+        correctAnswer: "C: Test 3"
     },
     {
         question: "Test Question 6",
@@ -83,7 +88,7 @@ var questions = [
             { choice: "C: Test 3" },
             { choice: "D: Test 4" }
         ],
-        correctAnswer: "c"
+        correctAnswer: "C: Test 3"
     },
     {
         question: "Test Question 7",
@@ -93,7 +98,7 @@ var questions = [
             { choice: "C: Test 3" },
             { choice: "D: Test 4" }
         ],
-        correctAnswer: "c"
+        correctAnswer: "C: Test 3"
     },
     {
         question: "Test Question 8",
@@ -103,7 +108,7 @@ var questions = [
             { choice: "C: Test 3" },
             { choice: "D: Test 4" }
         ],
-        correctAnswer: "c"
+        correctAnswer: "C: Test 3"
     },
     {
         question: "Test Question 9",
@@ -113,7 +118,7 @@ var questions = [
             { choice: "C: Test 3" },
             { choice: "D: Test 4" }
         ],
-        correctAnswer: "c"
+        correctAnswer: "C: Test 3"
     },
     {
         question: "Test Question 10",
@@ -123,7 +128,7 @@ var questions = [
             { choice: "C: Test 3" },
             { choice: "D: Test 4" }
         ],
-        correctAnswer: "c"
+        correctAnswer: "C: Test 3"
     },
 ]
 
@@ -159,10 +164,53 @@ var displayQuestion = function (index) {
         var answerBtn = document.createElement("button");
         answerBtn.innerText = index.choices[i].choice;
         answerBtn.classList.add('btn')
-        answerBtn.classList.add('answerbtn')
+        answerBtn.classList.add('choice')
         answerBtn.addEventListener("click", answerCheck);
-        answerButtonsEl.appendChild(answerBtn);
-        console.log("This worked")
+        containerQuestionEl.appendChild(answerBtn);
+    }
+}
+
+//display correct! on screen
+var answerCorrect = function () {
+    if (correctEl.className = "hide") {
+        correctEl.classList.remove("hide")
+        correctEl.classList.add("banner")
+        wrongEl.classList.remove("banner")
+        wrongEl.classList.add("hide")
+    }
+}
+//display wrong! on screen
+var answerWrong = function () {
+    if (wrongEl.className = "hide") {
+        wrongEl.classList.remove("hide")
+        wrongEl.classList.add("banner")
+        correctEl.classList.remove("banner")
+        correctEl.classList.add("hide")
+    }
+}
+
+//check if answer is correct    
+var answerCheck = function (event) {
+    var selectedAnswer = event.target
+    if (arrayShuffledQuestions[currentQuestionIndex].correctAnswer === selectedAnswer.innerText) {
+        answerCorrect()
+        score = score + 10
+    }
+
+    else {
+        answerWrong()
+        score = score - 10;
+        timerStart = timerStart - 10;
+    };
+
+    //go to next question, check if there is more questions
+    currentQuestionIndex++
+    if (arrayShuffledQuestions.length > currentQuestionIndex + 1) {
+        setQuestion()
+    }
+    else {
+        gameover = "true";
+        showScore();
     }
 }
 
@@ -176,4 +224,132 @@ function runTimer() {
     }, 1000);
 };
 
+var showScore = function () {
+    containerQuestionEl.classList.add("hide");
+    containerEndEl.classList.remove("hide");
+    containerEndEl.classList.add("show");
+
+    var scoreDisplay = document.createElement("p");
+    scoreDisplay.innerText = ("Your final score is " + score + "!");
+    containerScoreEl.appendChild(scoreDisplay);
+}
+
+//create high score values
+var createHighScore = function (event) {
+    event.preventDefault()
+    var initials = document.querySelector("#initials").value;
+    if (!initials) {
+        alert("Enter your intials!");
+        return;
+    }
+
+    formInitials.reset();
+
+    var HighScore = {
+        initials: initials,
+        score: score
+    }
+
+    //push and sort scores
+    HighScores.push(HighScore);
+    HighScores.sort((a, b) => { return b.score - a.score });
+
+    //clear visible list to resort
+    while (listHighScoreEl.firstChild) {
+        listHighScoreEl.removeChild(listHighScoreEl.firstChild)
+    }
+    //create elements in order of high scores
+    for (var i = 0; i < HighScores.length; i++) {
+        var highscoreEl = document.createElement("li");
+        highscoreEl.ClassName = "high-score";
+        highscoreEl.innerHTML = HighScores[i].initials + " - " + HighScores[i].score;
+        listHighScoreEl.appendChild(highscoreEl);
+    }
+
+    saveHighScore();
+    displayHighScores();
+
+}
+//save high score
+var saveHighScore = function () {
+    localStorage.setItem("HighScores", JSON.stringify(HighScores))
+
+}
+
+//load values/ called on page load
+var loadHighScore = function () {
+    var LoadedHighScores = localStorage.getItem("HighScores")
+    if (!LoadedHighScores) {
+        return false;
+    }
+
+    LoadedHighScores = JSON.parse(LoadedHighScores);
+    LoadedHighScores.sort((a, b) => { return b.score - a.score })
+
+
+    for (var i = 0; i < LoadedHighScores.length; i++) {
+        var highscoreEl = document.createElement("li");
+        highscoreEl.ClassName = "high-score";
+        highscoreEl.innerText = LoadedHighScores[i].initials + " - " + LoadedHighScores[i].score;
+        listHighScoreEl.appendChild(highscoreEl);
+
+        HighScores.push(LoadedHighScores[i]);
+
+    }
+}
+
+//display high score screen from link or when initials entered
+var displayHighScores = function () {
+
+    containerHighScoresEl.classList.remove("hide");
+    containerHighScoresEl.classList.add("show");
+    gameover = "true"
+
+    if (containerEndEl.className = "show") {
+        containerEndEl.classList.remove("show");
+        containerEndEl.classList.add("hide");
+    }
+    if (containerStartEl.className = "show") {
+        containerStartEl.classList.remove("show");
+        containerStartEl.classList.add("hide");
+    }
+
+    if (containerQuestionEl.className = "show") {
+        containerQuestionEl.classList.remove("show");
+        containerQuestionEl.classList.add("hide");
+    }
+
+    if (correctEl.className = "show") {
+        correctEl.classList.remove("show");
+        correctEl.classList.add("hide");
+    }
+
+    if (wrongEl.className = "show") {
+        wrongEl.classList.remove("show");
+        wrongEl.classList.add("hide");
+    }
+
+}
+//clears high scores
+var clearScores = function () {
+    HighScores = [];
+
+    while (listHighScoreEl.firstChild) {
+        listHighScoreEl.removeChild(listHighScoreEl.firstChild);
+    }
+
+    localStorage.clear(HighScores);
+
+}
+
+loadHighScore()
+
 startBtn.addEventListener("click", start);
+//on submit button -- enter or click
+formInitials.addEventListener("submit", createHighScore);
+//when view high-scores is clicked
+ViewHighScoreEl.addEventListener("click", displayHighScores);
+//Go back button
+btnGoBackEl.addEventListener("click", renderStartPage);
+//clear scores button
+btnClearScoresEl.addEventListener("click", clearScores);
