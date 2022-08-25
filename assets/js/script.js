@@ -21,7 +21,6 @@ var gameover;
 var answerButtonsEl = document.getElementById("answer-buttons");
 // Variables for the timer
 var timer = document.querySelector(".time");
-var timerStart = 100;
 // Main content variables
 var cont = document.getElementById('container');
 // var mainContentEl = document.querySelector(".main-content");
@@ -31,14 +30,14 @@ var arrayShuffledQuestions;
 var currentQuestionIndex = 0;
 var questions = [
     {
-        question: "Commonly used data types DO NOT include what?",
+        question: "How does a FOR loop start?",
         choices: [
-            { choice: "A: Test 1" },
-            { choice: "B: Test 2" },
-            { choice: "C: Test 3" },
-            { choice: "D: Test 4" }
+            { choice: "A: for (i <= 5; i++)" },
+            { choice: "B: for i = 1 to 5" },
+            { choice: "C: for (i = 0; i <= 5; i++)" },
+            { choice: "D: for (i = 0; i <= 5)" }
         ],
-        correctAnswer: "C: Test 3"
+        correctAnswer: "C: for (i = 0; i <= 5; i++)"
     },
     {
         question: "What does 'DOM' stand for?",
@@ -51,84 +50,82 @@ var questions = [
         correctAnswer: "D: Document Object Model"
     },
     {
-        question: "Test Question 3",
+        question: "Which of the following would be a comment in JavaScript?",
         choices: [
-            { choice: "A: Test 1" },
-            { choice: "B: Test 2" },
-            { choice: "C: Test 3" },
-            { choice: "D: Test 4" }
+            { choice: "A: // This is a comment" },
+            { choice: "B: /* This is a comment */" },
+            { choice: "C: <!-- This is a comment -->" },
+            { choice: "D: 'This is a comment'" }
         ],
-        correctAnswer: "C: Test 3"
+        correctAnswer: "A: // This is a comment"
     },
     {
-        question: "Test Question 4",
+        question: "Which of the following represents an array?",
         choices: [
-            { choice: "A: Test 1" },
-            { choice: "B: Test 2" },
-            { choice: "C: Test 3" },
-            { choice: "D: Test 4" }
+            { choice: "{'Apples', 'Oranges', 'Bananas'}" },
+            { choice: "['Apples', 'Oranges', 'Bananas']" },
+            { choice: "('Apples', 'Oranges', 'Bananas')" },
+            { choice: "[Apples, Oranges, Bananas]" }
         ],
-        correctAnswer: "C: Test 3"
+        correctAnswer: "['Apples', 'Oranges', 'Bananas']"
     },
     {
-        question: "Test Question 5",
+        question: "When writing 'Math.Random()', it will pick a number between _____ ",
         choices: [
-            { choice: "A: Test 1" },
-            { choice: "B: Test 2" },
-            { choice: "C: Test 3" },
-            { choice: "D: Test 4" }
+            { choice: "A: 0 and 1" },
+            { choice: "B: 1 and 10" },
+            { choice: "C: 0 and 10" },
+            { choice: "D: 0 and 1 but never 1" }
         ],
-        correctAnswer: "C: Test 3"
+        correctAnswer: "D: 0 and 1 but never 1"
     },
     {
-        question: "Test Question 6",
+        question: "How do you find the number with the highest value of x and y?",
         choices: [
-            { choice: "A: Test 1" },
-            { choice: "B: Test 2" },
-            { choice: "C: Test 3" },
-            { choice: "D: Test 4" }
+            { choice: "Math.max(x, y)" },
+            { choice: "B: ceil(x, y)" },
+            { choice: "C: Math.ceil(x, y)" },
+            { choice: "D: top(x, y)" }
         ],
-        correctAnswer: "C: Test 3"
+        correctAnswer: "Math.max(x, y)"
     },
     {
-        question: "Test Question 7",
+        question: "JavaScript is the same as Java",
         choices: [
-            { choice: "A: Test 1" },
-            { choice: "B: Test 2" },
-            { choice: "C: Test 3" },
-            { choice: "D: Test 4" }
+            { choice: "True" },
+            { choice: "False" }
         ],
-        correctAnswer: "C: Test 3"
+        correctAnswer: "False"
     },
     {
-        question: "Test Question 8",
+        question: "What will this code return: Boolean(10 > 9)",
         choices: [
-            { choice: "A: Test 1" },
-            { choice: "B: Test 2" },
-            { choice: "C: Test 3" },
-            { choice: "D: Test 4" }
+            { choice: "A: true" },
+            { choice: "B: false" },
+            { choice: "C: Nan" },
+            { choice: "D: null" }
         ],
-        correctAnswer: "C: Test 3"
+        correctAnswer: "A: true"
     },
     {
-        question: "Test Question 9",
+        question: "Which operator is used to assign a value to a variable?",
         choices: [
-            { choice: "A: Test 1" },
-            { choice: "B: Test 2" },
-            { choice: "C: Test 3" },
-            { choice: "D: Test 4" }
+            { choice: "A: +" },
+            { choice: "B: -" },
+            { choice: "C: /" },
+            { choice: "D: =" }
         ],
-        correctAnswer: "C: Test 3"
+        correctAnswer: "D: ="
     },
     {
-        question: "Test Question 10",
+        question: "Which event occurs when the user clicks on an HTML element?",
         choices: [
-            { choice: "A: Test 1" },
-            { choice: "B: Test 2" },
-            { choice: "C: Test 3" },
-            { choice: "D: Test 4" }
+            { choice: "A: onMouseOver" },
+            { choice: "B: onMouseClick" },
+            { choice: "C: onClick" },
+            { choice: "D: onChange" }
         ],
-        correctAnswer: "C: Test 3"
+        correctAnswer: "C: onClick"
     },
 ]
 
@@ -214,13 +211,25 @@ var answerCheck = function (event) {
     }
 }
 
-function runTimer() {
-    setInterval(function () {
+var runTimer = function () {
+    timerStart = 5;
+
+    var timerCheck = setInterval(function () {
         timer.innerHTML = timerStart;
         if (timerStart > 0) {
             timerStart--;
         }
-        // else if timerStart = 0 then quiz is over
+
+        if (gameover) {
+            clearInterval(timerCheck);
+            timer.innerText = 0;
+        }
+
+        if (timerStart < 1) {
+            showScore();
+            timer.innerText = 0;
+            clearInterval(timerCheck);
+        }
     }, 1000);
 };
 
@@ -239,7 +248,7 @@ var createHighScore = function (event) {
     event.preventDefault()
     var initials = document.querySelector("#initials").value;
     if (!initials) {
-        alert("Enter your intials!");
+        alert("Enter your initials!");
         return;
     }
 
@@ -261,7 +270,7 @@ var createHighScore = function (event) {
     //create elements in order of high scores
     for (var i = 0; i < HighScores.length; i++) {
         var highscoreEl = document.createElement("li");
-        highscoreEl.ClassName = "high-score";
+        highscoreEl.className = "high-score-entry";
         highscoreEl.innerHTML = HighScores[i].initials + " - " + HighScores[i].score;
         listHighScoreEl.appendChild(highscoreEl);
     }
@@ -303,6 +312,7 @@ var displayHighScores = function () {
 
     containerHighScoresEl.classList.remove("hide");
     containerHighScoresEl.classList.add("show");
+    containerHighScoresEl.classList.add("high-score-container");
     gameover = "true"
 
     if (containerEndEl.className = "show") {
@@ -330,6 +340,7 @@ var displayHighScores = function () {
     }
 
 }
+
 //clears high scores
 var clearScores = function () {
     HighScores = [];
@@ -339,17 +350,16 @@ var clearScores = function () {
     }
 
     localStorage.clear(HighScores);
-
 }
 
 loadHighScore()
 
 startBtn.addEventListener("click", start);
+//clear scores button
+btnClearScoresEl.addEventListener("click", clearScores);
 //on submit button -- enter or click
 formInitials.addEventListener("submit", createHighScore);
 //when view high-scores is clicked
 ViewHighScoreEl.addEventListener("click", displayHighScores);
 //Go back button
 btnGoBackEl.addEventListener("click", renderStartPage);
-//clear scores button
-btnClearScoresEl.addEventListener("click", clearScores);
