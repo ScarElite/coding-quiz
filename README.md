@@ -9,11 +9,10 @@ This website was created to provide you with a JavaScript quiz to test your know
 * JavaScript
 
 ### Go to the website by clicking the link below!
-
-
+https://scarelite.github.io/coding-quiz/
 
 ## Here's a preview of the quiz!
-
+![](assets/images/Coding-Quiz-picture.PNG)
 
 ## Contribution:
 Made by Mitchell Armstrong
