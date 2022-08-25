@@ -3,6 +3,7 @@
     font-family: 'Courier New', Courier, monospace;
 }
 
+/* Applies styles to the header */
 header {
     margin: 20px 20px 0 20px;
 }
@@ -14,14 +15,6 @@ header nav {
     padding: 20px 0px 0 20px;
 }
 
-.timer-container {
-    display: flex;
-}
-
-.timer {
-    padding-right: 10px;
-}
-
 header nav a {
     text-decoration: none;
     color: purple;
@@ -29,6 +22,17 @@ header nav a {
 
 header nav a:hover {
     color: rgb(144, 0, 255);
+}
+
+/* Applies styles to the main section of the quiz*/
+main p {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 1.5;
+}
+
+main p span {
+    color: red;
 }
 
 .main-content {
@@ -43,6 +47,16 @@ header nav a:hover {
     color: darkcyan;
 }
 
+/* The time on the top right of the screen that's displayed throughout the entire quiz */
+.timer-container {
+    display: flex;
+}
+
+.timer {
+    padding-right: 10px;
+}
+
+/* Applies styling to the question that appears */
 .main-heading-question {
     font-weight: 900;
     font-size: 56px;
@@ -50,20 +64,11 @@ header nav a:hover {
     text-align: left;
 }
 
-main p {
-    font-weight: 600;
-    font-size: 36px;
-    line-height: 1.5;
-}
-
-main p span {
-    color: red;
-}
-
 #theList {
     padding-left: 0;
 }
 
+/* Styles the potential answers the user has to choose from that appear underneath the question */
 .choice {
     display: block;
     font-size: 36px;
@@ -113,7 +118,7 @@ main p span {
     margin: 20px 0;
 }
 
-/*  */
+/* Styles the button to start the quiz */
 #start-quiz {
     font-size: 36px;
     font-weight: 600;
@@ -130,6 +135,7 @@ main p span {
     box-shadow: 5px 5px rgb(0, 0, 0, 0.3);
 }
 
+/* Styles the div that wraps the highscore information in */
 .high-score-container {
     display: inline-block;
     width: 100%;
@@ -167,6 +173,7 @@ main p span {
     box-shadow: 5px 5px rgb(0, 0, 0, 0.3);
 }
 
+/* Gives the button to clear the highscores a cursor that resembles the user "clicking" it */
 .clear-high-score {
     cursor: pointer;
 }
@@ -183,6 +190,7 @@ main p span {
     color: white;
 }
 
+/* Styles the content at the end of the quiz. The score and the buttons for the highscore */
 .all-done-container {
     color: rebeccapurple;
     font-size: 28px;

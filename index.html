@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <!-- Has the "View High Scores" and displays how much time is left -->
     <header>
         <nav>
             <h2 id="view-high-scores" class="high-score">View High Scores</h2>
@@ -20,6 +21,7 @@
         </nav>
     </header>
 
+    <!-- The user first sees this container that has the Quiz intro -->
     <div id="starter-container" class="show">
         <main class="main-content container start">
             <h1 class="main-heading">Coding Quiz Challenge</h1>
@@ -29,10 +31,12 @@
                 answers
                 will penalize your time by <span>ten seconds</span> and your score by <span>10 points!</span>
             </p>
+            <!-- The user clicks this to start the quiz -->
             <button class="btn startend" id="start-quiz">Start Quiz</button>
         </main>
     </div>
 
+    <!-- This is a container that the user sees after starting the quiz and contains the questions and answers content -->
     <div id="question-container" class="hide main-content">
         <div class="container questions">
             <div id="question"></div>
@@ -40,11 +44,13 @@
         </div>
     </div>
 
+    <!-- This is a container that the user sees after the quiz has ended and contains the score they have received -->
     <div id="end-container" class="hide">
         <div class="container end all-done-container">
             <div id=score-banner>
                 <h1>All done!</h1>
             </div>
+            <!-- The user will enter their initials here to save their score -->
             <form id="initials-form" class="initials">
                 <p> Enter Initials:
                     <input type="text" name="initials" id="initials" class="text-input" />
@@ -54,20 +60,24 @@
         </div>
     </div>
 
+    <!-- This is a container that contains all of the high score information -->
     <div id="high-score-container" class="hide">
         <div class="high-scores container high-score-container">
             <h1 class="high-score high-score-header">High Scores</h1>
             <ol id="high-score-list" class="score-list"></ol>
             <div class="high-score-buttons">
                 <button class="btn high-score-btn" id="go-back"><a href="">Go Back</a></button>
+                <!-- The user can click this button to clear all of the high score data -->
                 <button class="btn high-score-btn clear-high-score" id="clear-high-scores">Clear high scores</button>
             </div>
         </div>
     </div>
 
+    <!-- When an answer is correct this content will appear -->
     <div class="hide" id="correct">
         <h2>That's correct!</h2>
     </div>
+    <!-- When an answer is incorrect this content will appear -->
     <div class="hide" id="wrong">
         <h2>Wrong Answer!</h2>
     </div>

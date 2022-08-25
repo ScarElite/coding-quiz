@@ -1,30 +1,33 @@
+// Main content variables
+var cont = document.getElementById('container');
+var score = 0;
+var gameover;
 var containerQuestionEl = document.getElementById("question-container");
 var containerStartEl = document.getElementById("starter-container");
 var containerEndEl = document.getElementById("end-container")
 var containerScoreEl = document.getElementById("score-banner")
 var formInitials = document.getElementById("initials-form")
+var correctEl = document.getElementById("correct")
+var wrongEl = document.getElementById("wrong")
+
+// High Score variables
 var containerHighScoresEl = document.getElementById("high-score-container")
 var ViewHighScoreEl = document.getElementById("view-high-scores")
 var listHighScoreEl = document.getElementById("high-score-list")
-var correctEl = document.getElementById("correct")
-var wrongEl = document.getElementById("wrong")
-var startBtn = document.querySelector("#start-quiz");
 
 //High Score Array
 var HighScores = [];
+
+// buttons
+var startBtn = document.querySelector("#start-quiz");
 var btnClearScoresEl = document.querySelector("#clear-high-scores")
 var btnGoBackEl = document.querySelector("#go-back")
-
-var score = 0;
-var timeleft;
-var gameover;
 var answerButtonsEl = document.getElementById("answer-buttons");
+
 // Variables for the timer
 var timer = document.querySelector(".time");
-// Main content variables
-var cont = document.getElementById('container');
-// var mainContentEl = document.querySelector(".main-content");
-// var mainHeadingEl = document.querySelector(".main-heading");
+var timeleft;
+
 // Variables for the Quiz questions and answers
 var arrayShuffledQuestions;
 var currentQuestionIndex = 0;
@@ -129,6 +132,7 @@ var questions = [
     },
 ]
 
+// The start function is called when the user clicks the Start Quiz button on the main screen
 var start = function () {
     //add classes to show/hide start and quiz screen
     containerStartEl.classList.add('hide');
@@ -142,21 +146,25 @@ var start = function () {
     setQuestion();
 }
 
+// Sets the questions for the user each time a question is answered as well as when the quiz starts
 var setQuestion = function () {
     resetAnswers();
     displayQuestion(arrayShuffledQuestions[currentQuestionIndex]);
 }
 
+// This function resets the answers
 var resetAnswers = function () {
     while (answerButtonsEl.firstChild) {
         answerButtonsEl.removeChild(answerButtonsEl.firstChild);
     };
 };
 
+// This function displays the questions and assigns it the correct class needed to have it styled correctly
 var displayQuestion = function (index) {
     containerQuestionEl.classList.add("main-heading-question");
     containerQuestionEl.innerText = index.question;
 
+    // Each question needs answers and this will look back at the questions variable and create the answers that are associated with the question that is presented
     for (var i = 0; i < index.choices.length; i++) {
         var answerBtn = document.createElement("button");
         answerBtn.innerText = index.choices[i].choice;
@@ -211,6 +219,7 @@ var answerCheck = function (event) {
     }
 }
 
+// The timer function that controls how much time the user has left
 var runTimer = function () {
     timerStart = 5;
 
@@ -220,11 +229,13 @@ var runTimer = function () {
             timerStart--;
         }
 
+        // If the game is over before the timer reaches 0 then this sets the timer to 0
         if (gameover) {
             clearInterval(timerCheck);
             timer.innerText = 0;
         }
 
+        // If the timer reaches 0 then the game is over and it will take the user to the end screen to see all of the ending information
         if (timerStart < 1) {
             showScore();
             timer.innerText = 0;
@@ -233,6 +244,7 @@ var runTimer = function () {
     }, 1000);
 };
 
+// This will show the user their score
 var showScore = function () {
     containerQuestionEl.classList.add("hide");
     containerEndEl.classList.remove("hide");
